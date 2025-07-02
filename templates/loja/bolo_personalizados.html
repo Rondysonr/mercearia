@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .page-bolo-personalizado {
+    background-color: #fdf7f2;
+    font-family: Arial, sans-serif;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #b23a48;
+    margin-bottom: 30px;
+    font-size: 32px;
+  }
+
+  form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333333;
+  }
+
+  select,
+  input[type="number"],
+  input[type="file"],
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fffaf7;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    background-color: #e94f37;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #d63b28;
+  }
+
+  #resultado {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2e7d32;
+  }
+
+  .preview {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .preview img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+
+  .info-box {
+    display: none;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fffaf7;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+
+  .info-box img {
+    width: 100px;
+    float: right;
+    margin-left: 10px;
+    border-radius: 6px;
+  }
+
+  .info-box h3 {
+    margin-top: 0;
+  }
+
+  .clear {
+    clear: both;
+  }
+</style>
+
+<div class="page-bolo-personalizado">
+  <h1>Monte seu Bolo Personalizado</h1>
+
+  <form id="formBolo">
+    <!-- IMAGEM -->
+    <label for="imagem">Imagem de Referência (opcional):</label>
+    <input type="file" name="imagem" id="imagem" accept="image/*">
+    <div class="preview" id="preview"></div>
+
+    <!-- FORMATO -->
+    <label for="formato">Formato do Bolo:</label>
+    <select name="formato" id="formato" onchange="mostrarInfo(this)">
+      <option value="">Nenhum</option>
+      {% for formato in formatos %}
+        <option value="{{ formato.slug }}" data-descricao="{{ formato.descricao }}" data-imagem="{{ formato.imagem.url }}">
+          {{ formato.produto_nome }}
+        </option>
+      {% endfor %}
+    </select>
+    <div class="info-box" id="info-formato">
+      <img id="formato-img" src="" alt="">
+      <h3 id="formato-nome"></h3>
+      <p id="formato-desc"></p>
+      <div class="clear"></div>
+    </div>
+
+    <!-- MASSA -->
+    <label for="massa">Sabor da Massa:</label>
+    <select name="massa" id="massa" onchange="mostrarInfo(this)">
+      <option value="">Nenhum</option>
+      {% for massa in massas %}
+        <option value="{{ massa.slug }}" data-descricao="{{ massa.descricao }}" data-imagem="{{ massa.imagem.url }}">
+          {{ massa.produto_nome }}
+        </option>
+      {% endfor %}
+    </select>
+    <div class="info-box" id="info-massa">
+      <img id="massa-img" src="" alt="">
+      <h3 id="massa-nome"></h3>
+      <p id="massa-desc"></p>
+      <div class="clear"></div>
+    </div>
+
+    <!-- RECHEIO -->
+    <label for="recheio">Recheio:</label>
+    <select name="recheio" id="recheio" onchange="mostrarInfo(this)">
+      <option value="">Nenhum</option>
+      {% for recheio in recheios %}
+        <option value="{{ recheio.slug }}" data-descricao="{{ recheio.descricao }}" data-imagem="{{ recheio.imagem.url }}">
+          {{ recheio.produto_nome }}
+        </option>
+      {% endfor %}
+    </select>
+    <div class="info-box" id="info-recheio">
+      <img id="recheio-img" src="" alt="">
+      <h3 id="recheio-nome"></h3>
+      <p id="recheio-desc"></p>
+      <div class="clear"></div>
+    </div>
+
+    <!-- COBERTURA -->
+    <label for="cobertura">Cobertura:</label>
+    <select name="cobertura" id="cobertura" onchange="mostrarInfo(this)">
+      <option value="">Nenhum</option>
+      {% for cobertura in coberturas %}
+        <option value="{{ cobertura.slug }}" data-descricao="{{ cobertura.descricao }}" data-imagem="{{ cobertura.imagem.url }}">
+          {{ cobertura.produto_nome }}
+        </option>
+      {% endfor %}
+    </select>
+    <div class="info-box" id="info-cobertura">
+      <img id="cobertura-img" src="" alt="">
+      <h3 id="cobertura-nome"></h3>
+      <p id="cobertura-desc"></p>
+      <div class="clear"></div>
+    </div>
+
+    <!-- ENFEITE -->
+    <label for="enfeite">Enfeites:</label>
+    <select name="enfeite" id="enfeite" onchange="mostrarInfo(this)">
+      <option value="">Nenhum</option>
+      {% for enfeite in enfeites %}
+        <option value="{{ enfeite.slug }}" data-descricao="{{ enfeite.descricao }}" data-imagem="{{ enfeite.imagem.url }}">
+          {{ enfeite.produto_nome }}
+        </option>
+      {% endfor %}
+    </select>
+    <div class="info-box" id="info-enfeite">
+      <img id="enfeite-img" src="" alt="">
+      <h3 id="enfeite-nome"></h3>
+      <p id="enfeite-desc"></p>
+      <div class="clear"></div>
+    </div>
+
+    <!-- PESO -->
+    <label for="peso">Peso (kg):</label>
+    <input type="number" name="peso" id="peso" step="0.1" min="0.5" required>
+
+    <!-- PREÇO -->
+    <label for="preco">Preço Estimado:</label>
+    <input type="text" id="preco" name="preco" placeholder="A calcular..." readonly>
+
+    <button type="submit">Visualizar Montagem</button>
+  </form>
+
+  <div id="resultado"></div>
+</div>
+
+<script>
+  document.getElementById('imagem').addEventListener('change', function () {
+    const file = this.files[0];
+    const preview = document.getElementById('preview');
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.innerHTML = `<img src="${e.target.result}" alt="Prévia do bolo">`;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      preview.innerHTML = '';
+    }
+  });
+
+  function mostrarInfo(selectElement) {
+    const id = selectElement.id;
+    const selected = selectElement.options[selectElement.selectedIndex];
+    const nome = selected.textContent;
+    const descricao = selected.getAttribute('data-descricao');
+    const imagem = selected.getAttribute('data-imagem');
+
+    const box = document.getElementById(`info-${id}`);
+    if (descricao && imagem) {
+      document.getElementById(`${id}-nome`).textContent = nome;
+      document.getElementById(`${id}-desc`).textContent = descricao;
+      document.getElementById(`${id}-img`).src = imagem;
+      box.style.display = 'block';
+    } else {
+      box.style.display = 'none';
+    }
+  }
+
+  document.getElementById('formBolo').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('resultado').innerText = 'Visualização pronta!';
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    const selects = ['formato', 'massa', 'recheio', 'cobertura', 'enfeite'];
+    selects.forEach(function (id) {
+      const select = document.getElementById(id);
+      if (select) {
+        mostrarInfo(select);
+      }
+    });
+  });
+</script>
+
+{% endblock %}
