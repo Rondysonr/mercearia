@@ -240,11 +240,11 @@ article:after,
 }
 
 .bg {
-  background-color: #f8f9fa;
+  background-color: #f17fd7;
 }
 
 .bg-white {
-  background-color: #fff;
+  background-color: #f4a1a1;
 }
 
 .bg-orange {
@@ -1411,5 +1411,7 @@ a[class*=card]:hover .title {
   margin-right: 5px;
   display: block;
 }
-
+body {
+    background: #f8e1e7; /* tom pastel rosé */
+}
 /*# sourceMappingURL=ui.css.map */
