@@ -7,9 +7,9 @@
 <!-- filepath: c:\Users\rondyson\mercearia\templates\loja\loja.html -->
 <section class="section-pagetop bg" style="padding:0;">
   <div class="container-fluid p-0">
-    {% comment %} <h2 class="title-page mb-4 text-center" style="padding-top:24px;">Personalize seu bolo</h2> {% endcomment %}
     <a href="{% url 'bolo_personalizado' %}">
-      <img src="{% static 'images/banners/baner.jpeg' %}" alt="Banner" style="width:100%; height:auto; display:block;">
+      <img src="{% static 'images/banners/baner.jpeg' %}" alt="Banner"
+           style="width:100%; height:180px; object-fit:cover; display:block;">
     </a>
   </div>
 </section>

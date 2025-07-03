@@ -1,4 +1,3 @@
-<!-- filepath: c:\Users\rondyson\mercearia\templates\includes\navbar.html -->
 {% load static %}
 
 <header class="section-header">
@@ -24,13 +23,12 @@
         </div>
     </nav>
     
-   <!-- filepath: c:\Users\rondyson\mercearia\templates\includes\navbar.html -->
     <section class="header-main border-bottom">
         <div class="container">
-            <div class="d-flex align-items-center py-2">
+            <div class="d-flex align-items-center py-2 flex-wrap">
                 <!-- Logo -->
                 <a href="{% url 'loja' %}" class="brand-wrap mr-3" style="display: flex; align-items: center; flex: 1;">
-                    <img class="logo" src="{% static 'images/logo.jpg' %}" style="width:100px; ">
+                    <!--<img class="logo" src="{% static 'images/logo.jpg' %}" style="width:100px; ">-->
                 </a>
                 <!-- Botão Categoria -->
                 <div class="dropdown mr-2">
@@ -73,5 +71,4 @@
                 </div>
             </div>
         </div>
-    </section>
-</header>
+        
