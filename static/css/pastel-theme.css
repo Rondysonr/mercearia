@@ -1,0 +1,284 @@
+/* =============================================
+   TEMA PASTEL PERSONALIZADO
+   ============================================= */
+
+/* Cores Pastéis Principais */
+:root {
+    /* Cores pastéis principais */
+    --pastel-pink: #FFD3E0;          /* Rosa pastel suave */
+    --pastel-blue: #C4E7FF;          /* Azul pastel suave */
+    --pastel-green: #D4F5D4;         /* Verde pastel suave */
+    --pastel-yellow: #FFF9C4;        /* Amarelo pastel suave */
+    --pastel-purple: #E6D3FF;        /* Roxo pastel suave */
+    --pastel-orange: #FFE6CC;        /* Laranja pastel suave */
+    --pastel-mint: #C4F5E6;          /* Menta pastel suave */
+    --pastel-peach: #FFE4D6;         /* Pêssego pastel suave */
+    
+    /* Cores de fundo */
+    --bg-primary: #FEFBFF;           /* Fundo principal muito claro */
+    --bg-secondary: #F8F5FF;         /* Fundo secundário lilás claro */
+    --bg-card: #FFFFFF;              /* Fundo dos cards */
+    
+    /* Cores de texto */
+    --text-primary: #5A4B6B;         /* Texto principal em roxo escuro suave */
+    --text-secondary: #7B6B8A;       /* Texto secundário */
+    --text-muted: #A29CB3;           /* Texto apagado */
+    
+    /* Cores de botões */
+    --btn-primary: #B19CD9;          /* Botão principal em roxo pastel */
+    --btn-primary-hover: #9B7ECC;    /* Hover do botão principal */
+    --btn-success: #A8D8A8;          /* Botão de sucesso em verde pastel */
+    --btn-warning: #F5D798;          /* Botão de aviso em amarelo pastel */
+    --btn-danger: #F5A8A8;           /* Botão de perigo em rosa pastel */
+    
+    /* Cores de bordas */
+    --border-light: #E8E1F0;         /* Borda clara */
+    --border-normal: #D3C5E6;        /* Borda normal */
+}
+
+/* ============ APLICAÇÃO DAS CORES PASTÉIS ============ */
+
+/* Fundo geral do site */
+body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Header e navegação */
+.navbar {
+    background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-pink)) !important;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    color: var(--text-primary) !important;
+}
+
+/* Cards */
+.card {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-light) !important;
+    box-shadow: 0 2px 12px rgba(177, 156, 217, 0.1) !important;
+}
+
+.card-header {
+    background-color: var(--bg-secondary) !important;
+    border-bottom: 1px solid var(--border-light) !important;
+}
+
+/* Botões - Cores pastéis */
+.btn-primary {
+    background-color: var(--btn-primary) !important;
+    border-color: var(--btn-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-primary-hover) !important;
+    border-color: var(--btn-primary-hover) !important;
+}
+
+.btn-success {
+    background-color: var(--btn-success) !important;
+    border-color: var(--btn-success) !important;
+    color: var(--text-primary) !important;
+}
+
+.btn-warning {
+    background-color: var(--btn-warning) !important;
+    border-color: var(--btn-warning) !important;
+    color: var(--text-primary) !important;
+}
+
+.btn-danger {
+    background-color: var(--btn-danger) !important;
+    border-color: var(--btn-danger) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Links */
+a {
+    color: var(--btn-primary) !important;
+}
+
+a:hover {
+    color: var(--btn-primary-hover) !important;
+}
+
+/* Formulários */
+.form-control {
+    border: 1px solid var(--border-normal) !important;
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+.form-control:focus {
+    border-color: var(--btn-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(177, 156, 217, 0.25) !important;
+}
+
+/* Badges */
+.badge-primary {
+    background-color: var(--btn-primary) !important;
+}
+
+.badge-success {
+    background-color: var(--btn-success) !important;
+}
+
+.badge-warning {
+    background-color: var(--btn-warning) !important;
+}
+
+.badge-danger {
+    background-color: var(--btn-danger) !important;
+}
+
+/* Alertas */
+.alert-primary {
+    background-color: var(--pastel-blue) !important;
+    border-color: var(--border-normal) !important;
+    color: var(--text-primary) !important;
+}
+
+.alert-success {
+    background-color: var(--pastel-green) !important;
+    border-color: var(--border-normal) !important;
+    color: var(--text-primary) !important;
+}
+
+.alert-warning {
+    background-color: var(--pastel-yellow) !important;
+    border-color: var(--border-normal) !important;
+    color: var(--text-primary) !important;
+}
+
+.alert-danger {
+    background-color: var(--pastel-pink) !important;
+    border-color: var(--border-normal) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Seções específicas */
+.section-content {
+    background-color: var(--bg-primary) !important;
+}
+
+.section-content.bg {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Produto cards */
+.product-card {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary)) !important;
+    border: 1px solid var(--border-light) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.product-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(177, 156, 217, 0.15) !important;
+}
+
+/* Preços */
+.price-wrap {
+    color: var(--btn-primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Tabelas */
+.table {
+    background-color: var(--bg-card) !important;
+}
+
+.table th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-light) !important;
+}
+
+.table td {
+    border-color: var(--border-light) !important;
+}
+
+/* Carrossel/Banner */
+.banner {
+    background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-pink), var(--pastel-blue)) !important;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--pastel-mint), var(--pastel-blue)) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    background-color: var(--bg-secondary) !important;
+}
+
+.breadcrumb-item a {
+    color: var(--btn-primary) !important;
+}
+
+/* Paginação */
+.page-link {
+    color: var(--btn-primary) !important;
+    border-color: var(--border-normal) !important;
+}
+
+.page-link:hover {
+    color: var(--btn-primary-hover) !important;
+    background-color: var(--bg-secondary) !important;
+}
+
+.page-item.active .page-link {
+    background-color: var(--btn-primary) !important;
+    border-color: var(--btn-primary) !important;
+    color: white !important;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-light) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Modais */
+.modal-content {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-light) !important;
+}
+
+.modal-header {
+    background-color: var(--bg-secondary) !important;
+    border-bottom: 1px solid var(--border-light) !important;
+}
+
+/* Personalização específica para elementos da loja */
+.itemside .info .title {
+    color: var(--text-primary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Animações suaves */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Responsividade para cores pastéis */
+@media (max-width: 768px) {
+    body {
+        background-color: var(--bg-primary) !important;
+    }
+    
+    .navbar {
+        background: var(--pastel-purple) !important;
+    }
+}

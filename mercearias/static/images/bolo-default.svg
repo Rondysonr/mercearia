@@ -1,0 +1,9 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#FFD3E0"/>
+  <circle cx="100" cy="80" r="50" fill="#E6D3FF" stroke="#B19CD9" stroke-width="2"/>
+  <rect x="50" y="110" width="100" height="60" fill="#F8F5FF" stroke="#B19CD9" stroke-width="2" rx="5"/>
+  <text x="100" y="190" text-anchor="middle" font-family="Arial" font-size="14" fill="#5A4B6B">Bolo Personalizado</text>
+  <circle cx="80" cy="90" r="3" fill="#F5A8A8"/>
+  <circle cx="100" cy="85" r="3" fill="#A8D8A8"/>
+  <circle cx="120" cy="90" r="3" fill="#F5D798"/>
+</svg>
