@@ -140,13 +140,8 @@ a:hover {
 }
 
 .hover-bg:hover {
-  background: #f8e1e7;
-  /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #f8e1e7, #f8e1e7);
-  /* Standard syntax */
+  background: #F4C2C2;
+  background: linear-gradient(to bottom right, #F4C2C2, #E8D5E8);
   transition: 0.5s;
 }
 
@@ -240,86 +235,61 @@ article:after,
 }
 
 .bg {
-  background-color: #f17fd7;
+  background-color: #FAF7FA;
 }
 
 .bg-white {
-  background-color: #f4a1a1;
+  background-color: #FFF;
 }
 
 .bg-orange {
-  background-color: #ff9017;
+  background-color: #F5C48B;
 }
 
 .bg-green {
-  background-color: #00b517;
+  background-color: #B8E6B8;
 }
 
 .bg-blue {
-  background-color: #f8e1e7;
+  background-color: #B5E7E7;
 }
 
 .bg-red {
-  background-color: #fa3434;
+  background-color: #F5A5A5;
 }
 
 .bg-gradient-blue {
-  background: rgba(33, 37, 41, 0.4);
-  /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, rgba(49, 103, 235, 0.9), rgba(33, 37, 41, 0.4));
-  /* Standard syntax */
+  background: rgba(244, 194, 194, 0.4);
+  background: linear-gradient(to bottom right, rgba(244, 194, 194, 0.9), rgba(232, 213, 232, 0.4));
   transition: 0.5s;
 }
 
 .bg-gradient-green {
-  background: rgba(33, 37, 41, 0.4);
-  /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, rgba(0, 181, 23, 0.9), rgba(33, 37, 41, 0.4));
-  /* Standard syntax */
+  background: rgba(244, 194, 194, 0.4);
+  background: linear-gradient(to bottom right, rgba(184, 230, 184, 0.9), rgba(232, 213, 232, 0.4));
   transition: 0.5s;
 }
 
 .bg-gradient-orange {
-  background: rgba(33, 37, 41, 0.4);
-  /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, rgba(255, 144, 23, 0.9), rgba(33, 37, 41, 0.4));
-  /* Standard syntax */
+  background: rgba(244, 194, 194, 0.4);
+  background: linear-gradient(to bottom right, rgba(245, 196, 139, 0.9), rgba(232, 213, 232, 0.4));
   transition: 0.5s;
 }
 
 .bg-gradient-red {
-  background: rgba(33, 37, 41, 0.4);
-  /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, rgba(250, 52, 52, 0.9), rgba(33, 37, 41, 0.4));
-  /* Standard syntax */
+  background: rgba(244, 194, 194, 0.4);
+  background: linear-gradient(to bottom right, rgba(245, 165, 165, 0.9), rgba(232, 213, 232, 0.4));
   transition: 0.5s;
 }
 
 .bg-gradient-pink {
-  background: rgba(33, 37, 41, 0.4);
-  /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, rgba(232, 62, 140, 0.9), rgba(33, 37, 41, 0.4));
-  /* Standard syntax */
+  background: rgba(244, 194, 194, 0.4);
+  background: linear-gradient(to bottom right, rgba(244, 194, 194, 0.9), rgba(232, 213, 232, 0.4));
   transition: 0.5s;
 }
 
 .bg-pattern {
-  background-image: url(../images/banners/bg-pattern.svg), linear-gradient(135deg, #3167eb, #545454);
+  background-image: url(../images/banners/bg-pattern.svg), linear-gradient(135deg, #F4C2C2, #E8D5E8);
   background-size: cover, auto;
   background-repeat: no-repeat, repeat;
   background-position: 0px 0px, 50% 50%;
@@ -327,8 +297,8 @@ article:after,
 
 .bg-img {
   overflow: hidden;
-  background-color: #ddd;
-  background-image: linear-gradient(135deg, rgba(49, 103, 235, 0.8), rgba(84, 84, 84, 0.9)), url("../images/banners/bg-cpu.jpg");
+  background-color: #F0EBF0;
+  background-image: linear-gradient(135deg, rgba(244, 194, 194, 0.95), rgba(232, 213, 232, 0.85)), url("../images/banners/bg-cpu.jpg");
   background-position: 0px 0px, 50% 50%;
   background-size: auto cover;
 }
@@ -346,13 +316,8 @@ article:after,
   bottom: 0;
   opacity: 0.6;
   transition: 0.5s;
-  background: aqua;
-  /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #3167eb, aqua);
-  /* Standard syntax */
+  background: #F4C2C2;
+  background: linear-gradient(to bottom right, #F4C2C2, #E8D5E8);
 }
 .overlay-gradient:hover:before {
   opacity: 0.9;
@@ -365,18 +330,18 @@ article:after,
 }
 
 .section-title {
-  color: #212529;
+  color: #5A4A5A;
 }
 
 .title-text {
   margin-top: 30px;
   margin-bottom: 10px;
   font-weight: bold;
-  color: #212529;
+  color: #5A4A5A;
 }
 
 .title-page {
-  color: #212529;
+  color: #5A4A5A;
 }
 
 .text-lg {
@@ -392,7 +357,7 @@ article:after,
 }
 
 .dark {
-  color: #212529;
+  color: #5A4A5A;
 }
 
 .black {
@@ -415,10 +380,10 @@ p:last-child {
 /* ================== SECTIONS =================== */
 /* ================== header main ==================  */
 .header-top-light .nav-link {
-  color: #969696;
+  color: #B5A5B5;
 }
 .header-top-light .nav-link:hover {
-  color: #212529;
+  color: #F4C2C2;
 }
 
 .header-main {
@@ -435,10 +400,10 @@ p:last-child {
 
 .navbar-main .nav-link {
   font-weight: 500;
-  color: #1c1c1c;
+  color: #5A4A5A;
 }
 .navbar-main .nav-link:hover {
-  color: #666;
+  color: #F4C2C2;
 }
 
 .widget-header {
@@ -447,13 +412,13 @@ p:last-child {
   position: relative;
 }
 .widget-header a {
-  color: #343a40;
+  color: #5A4A5A;
 }
 .widget-header a:hover {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 .widget-header i {
-  color: #969696;
+  color: #B5A5B5;
 }
 .widget-header form {
   min-width: 280px;
@@ -467,7 +432,7 @@ p:last-child {
   right: -10px;
 }
 .widget-header:hover i {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 
 /* desktop only */
@@ -480,7 +445,7 @@ p:last-child {
   color: inherit;
 }
 .section-footer ul a:hover {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 .section-footer .logo-footer {
   height: 40px;
@@ -488,7 +453,7 @@ p:last-child {
 .section-footer .title {
   font-weight: 600;
   margin-bottom: 16px;
-  color: #212529;
+  color: #5A4A5A;
 }
 
 .footer-bottom {
@@ -505,9 +470,9 @@ p:last-child {
 /* ================ OWL SLIDER BANNER ================ */
 .slider-banner-owl .owl-nav .owl-prev, .slider-banner-owl .owl-nav .owl-next {
   padding: 16px 7px;
-  color: #FFF;
+  color: #fff;
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(244, 194, 194, 0.7);
   position: absolute;
   z-index: 9;
   position: absolute;
@@ -528,7 +493,7 @@ p:last-child {
   padding: 18px 7px;
   color: #FFF;
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(244, 194, 194, 0.7);
   position: absolute;
   z-index: 9;
   position: absolute;
@@ -550,7 +515,7 @@ p:last-child {
 }
 
 .btn-facebook {
-  background-color: #f8e1e7;
+  background-color: #F4C2C2;
   color: #fff;
 }
 .btn-facebook:hover {
@@ -558,7 +523,7 @@ p:last-child {
 }
 
 .btn-instagram {
-  background-color: #E52D27;
+  background-color: #F5A5A5;
   color: #fff;
 }
 .btn-instagram:hover {
@@ -566,7 +531,7 @@ p:last-child {
 }
 
 .btn-youtube {
-  background-color: #C8046C;
+  background-color: #E8D5E8;
   color: #fff;
 }
 .btn-youtube:hover {
@@ -574,7 +539,7 @@ p:last-child {
 }
 
 .btn-twitter {
-  background-color: #f8e1e7;
+  background-color: #B5E7E7;
   color: #fff;
 }
 .btn-twitter:hover {
@@ -582,7 +547,7 @@ p:last-child {
 }
 
 .btn-google {
-  background-color: #ff7575;
+  background-color: #F5C48B;
   color: #fff;
 }
 .btn-google:hover {
@@ -600,15 +565,15 @@ p:last-child {
 }
 
 .btn-light {
-  background-color: #fff;
-  border-color: #e4e4e4;
+  background-color: #FAF7FA;
+  border-color: #F0EBF0;
 }
 .btn-light i {
-  color: #969696;
+  color: #B5A5B5;
 }
 .btn-light:hover {
-  background-color: #fff;
-  border-color: #989898;
+  background-color: #F0EBF0;
+  border-color: #E8D5E8;
 }
 
 .btn .text + i {
@@ -637,10 +602,10 @@ p:last-child {
 .itemside .title {
   display: block;
   margin-bottom: 5px;
-  color: #212529;
+  color: #5A4A5A;
 }
 .itemside a.title:hover {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 
 a.itemside {
@@ -648,14 +613,14 @@ a.itemside {
 }
 
 .items-bordered-wrap .itemside:not(:last-child) {
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid #F0EBF0;
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
 
 .itemlist {
   padding: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #F0EBF0;
 }
 
 .list-inline {
@@ -723,7 +688,7 @@ ul.row, ul.row-sm {
   margin-right: 15px;
   vertical-align: middle;
   text-align: center;
-  color: #545454;
+  color: #B5A5B5;
   position: absolute;
   top: 3px;
   left: 0;
@@ -749,7 +714,7 @@ ul.row, ul.row-sm {
   width: 7px;
   border-radius: 100%;
   height: 7px;
-  background: #ced4da;
+  background: #E8D5E8;
 }
 
 .list-check {
@@ -765,11 +730,11 @@ ul.row, ul.row-sm {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 12px;
-  color: #00b517;
+  color: #B8E6B8;
   position: absolute;
   top: 2px;
   left: 0;
-  content: "";
+  content: "";
 }
 
 .list-normal {
@@ -782,7 +747,7 @@ ul.row, ul.row-sm {
 }
 .list-normal li:before {
   content: "•";
-  color: #3167eb;
+  color: #F4C2C2;
   display: inline-block;
   width: 1em;
   margin-left: -1em;
@@ -797,10 +762,10 @@ ul.row, ul.row-sm {
   margin-bottom: 5px;
 }
 .list-menu a {
-  color: #343a40;
+  color: #5A4A5A;
 }
 .list-menu a:hover {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 
 .cols-two {
@@ -823,16 +788,16 @@ a[class*=card] {
   color: initial;
 }
 a[class*=card]:hover .title {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 
 /* BASE STYLE FOR PRODUCT ITEM */
 [class*=card-product] a.title {
-  color: #212529;
+  color: #5A4A5A;
   display: block;
 }
 [class*=card-product] a.title:hover {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 [class*=card-product] .badge {
   top: 10px;
@@ -869,7 +834,7 @@ a[class*=card]:hover .title {
 }
 .card-product-grid .bottom-wrap {
   padding: 18px;
-  border-top: 1px solid #e4e4e4;
+  border-top: 1px solid #F0EBF0;
 }
 .card-product-grid .topbar {
   position: absolute;
@@ -881,10 +846,10 @@ a[class*=card]:hover .title {
   padding: 10px 15px;
 }
 .card-product-grid .topbar a {
-  color: #ccc;
+  color: #E8D5E8;
 }
 .card-product-grid .topbar a:hover {
-  color: #3167eb;
+  color: #F4C2C2;
 }
 .card-product-grid .fix-height {
   height: 80px;
@@ -900,13 +865,13 @@ a[class*=card]:hover .title {
   padding: 5px 0;
   text-align: center;
   position: absolute;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(244, 194, 194, 0.7);
 }
 .card-product-grid:hover .btn-overlay {
   opacity: 1;
 }
 .card-product-grid:hover {
-  box-shadow: 0 4px 15px rgba(153, 153, 153, 0.3);
+  box-shadow: 0 4px 15px rgba(244, 194, 194, 0.3);
   transition: 0.3s;
 }
 
@@ -927,7 +892,7 @@ a[class*=card]:hover .title {
 }
 .card-product-list .info-aside {
   padding: 1.5rem 1rem;
-  border-left: 1px solid #e4e4e4;
+  border-left: 1px solid #F0EBF0;
   height: 100%;
 }
 
@@ -954,7 +919,7 @@ a[class*=card]:hover .title {
   z-index: 10;
 }
 .card-banner .caption {
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgba(244, 194, 194, 0.8);
   z-index: 10;
   padding: 1.25rem;
   color: #fff;
@@ -987,7 +952,7 @@ a[class*=card]:hover .title {
   padding: 7px 20px;
   padding-top: 30px;
   border-radius: 0 0 0.37rem 0.37rem;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(244, 194, 194, 0.8) 100%);
   color: #fff;
 }
 .card-banner .img-bg {
@@ -1028,8 +993,8 @@ a[class*=card]:hover .title {
 .tag {
   display: inline-block;
   padding: 3px 7px;
-  background: #f2f2f2;
-  border: 1px solid #eee;
+  background: #F0EBF0;
+  border: 1px solid #E8D5E8;
   border-radius: 3px;
   margin-top: 4px;
   margin-right: 2px;
@@ -1055,16 +1020,16 @@ a[class*=card]:hover .title {
   text-align: center;
   border-radius: 3rem;
   color: #fff;
-  background-color: #fa3434;
+  background-color: #F5A5A5;
 }
 
 .price {
   font-weight: 600;
-  color: #212529;
+  color: #5A4A5A;
 }
 
 .price-old {
-  color: #969696;
+  color: #B5A5B5;
   margin-left: 3px;
   font-size: 85%;
 }
@@ -1081,7 +1046,7 @@ a[class*=card]:hover .title {
 }
 
 .filter-group {
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid #F0EBF0;
 }
 .filter-group .card-header {
   border-bottom: 0;
@@ -1095,7 +1060,7 @@ a[class*=card]:hover .title {
   padding: 18px;
   background: #fff;
   border-radius: 0.37rem;
-  border: 1px solid #e4e4e4;
+  border: 1px solid #F0EBF0;
 }
 .box img {
   max-width: 100%;
@@ -1121,7 +1086,7 @@ a[class*=card]:hover .title {
 }
 .rating-stars i {
   font-size: 14px;
-  color: #ccc;
+  color: #E8D5E8;
   display: inline;
 }
 .rating-stars img {
@@ -1142,7 +1107,7 @@ a[class*=card]:hover .title {
   overflow: hidden;
 }
 .rating-stars li.stars-active i {
-  color: orange;
+  color: #F5E19B;
 }
 .rating-stars.stars-lg img {
   height: 20px;
@@ -1152,7 +1117,7 @@ a[class*=card]:hover .title {
 /* ================= TRACKING ============== */
 .tracking-wrap {
   position: relative;
-  background-color: #ddd;
+  background-color: #F0EBF0;
   height: 7px;
   display: flex;
   margin-bottom: 60px;
@@ -1180,22 +1145,22 @@ a[class*=card]:hover .title {
   line-height: 40px;
   position: relative;
   border-radius: 100%;
-  background: #ddd;
+  background: #F0EBF0;
 }
 .tracking-wrap .text {
   display: block;
   margin-top: 7px;
 }
 .tracking-wrap .step.active .icon {
-  background: #3167eb;
+  background: #F4C2C2;
   color: #fff;
 }
 .tracking-wrap .step.active .text {
   font-weight: 400;
-  color: #000;
+  color: #5A4A5A;
 }
 .tracking-wrap .step.active:before {
-  background: #3167eb;
+  background: #F4C2C2;
 }
 
 .menu-category {
@@ -1205,13 +1170,13 @@ a[class*=card]:hover .title {
 .menu-category li {
   position: relative;
   display: block;
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid #F0EBF0;
 }
 .menu-category li:last-child {
   border-bottom: 0;
 }
 .menu-category a {
-  color: #212529;
+  color: #5A4A5A;
 }
 .menu-category > li > a {
   display: block;
@@ -1221,7 +1186,7 @@ a[class*=card]:hover .title {
   display: none;
   margin: 0;
   padding: 0;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 15px rgba(244, 194, 194, 0.3);
   z-index: 20;
   position: absolute;
   left: 100%;
@@ -1237,7 +1202,7 @@ a[class*=card]:hover .title {
   display: block;
 }
 .menu-category li:hover {
-  background: #f8f9fa;
+  background: #FAF7FA;
   transition: all 0.3s;
 }
 .menu-category li:hover .submenu {
@@ -1247,7 +1212,7 @@ a[class*=card]:hover .title {
 .menu-category .has-submenu > a:after {
   content: "›";
   font-size: 24px;
-  color: #999;
+  color: #B5A5B5;
   line-height: 18px;
   font-weight: bold;
   float: right;
@@ -1268,7 +1233,7 @@ a[class*=card]:hover .title {
   max-width: 46px;
   font-weight: bold;
   flex-basis: 46px;
-  border-color: #e4e4e4;
+  border-color: #F0EBF0;
   flex-grow: 0;
 }
 .input-spinner .btn {
@@ -1287,15 +1252,15 @@ a[class*=card]:hover .title {
   opacity: 0;
 }
 .checkbox-btn input:checked ~ .btn {
-  border-color: #f8e1e7;
-  background-color: #f8e1e7;
+  border-color: #F4C2C2;
+  background-color: #F4C2C2;
   color: #fff;
 }
 
 .btn-check {
   position: relative;
   display: inline-block;
-  border: 2px solid #dee2e6;
+  border: 2px solid #F0EBF0;
   transition: 0s !important;
 }
 .btn-check input {
@@ -1304,12 +1269,12 @@ a[class*=card]:hover .title {
   opacity: 0;
 }
 .btn-check input:checked ~ .btn {
-  border-color: #f8e1e7;
-  background-color: #f8e1e7;
+  border-color: #F4C2C2;
+  background-color: #F4C2C2;
   color: #fff;
 }
 .btn-check:hover:not(.active) {
-  border-color: #bbb;
+  border-color: #E8D5E8;
 }
 
 .js-check {
@@ -1324,10 +1289,10 @@ a[class*=card]:hover .title {
   left: 18px;
 }
 .js-check.active {
-  border-color: #3167eb;
+  border-color: #F4C2C2;
 }
 .js-check:hover:not(.active) {
-  border-color: #ccc;
+  border-color: #E8D5E8;
 }
 
 .js-check.box {
@@ -1370,7 +1335,7 @@ a[class*=card]:hover .title {
 .gallery-wrap .thumbs-wrap .item-thumb {
   width: 60px;
   height: 60px;
-  border: 1px solid #ddd;
+  border: 1px solid #F0EBF0;
   border-radius: 6px;
   margin: 3px;
   display: inline-block;
@@ -1411,7 +1376,10 @@ a[class*=card]:hover .title {
   margin-right: 5px;
   display: block;
 }
+
 body {
-    background: #f8e1e7; /* tom pastel rosé */
+    background: #FAF7FA; /* fundo rose pastel suave */
+    color: #5A4A5A; /* texto em tom suave */
 }
+
 /*# sourceMappingURL=ui.css.map */

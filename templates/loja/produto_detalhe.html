@@ -1,5 +1,6 @@
+<!-- filepath: c:\Users\rondyson\mercearia\templates\loja\produto_detalhe.html -->
 {% extends 'base.html' %}
-{%load static%}
+{% load static %}
 {% block content %}
 
 <section class="section-content padding-y bg">
@@ -7,110 +8,151 @@
 
 <!-- ============================ COMPONENT 1 ================================= -->
 <div class="card">
-	<div class="row no-gutters">
-		<aside class="col-md-6">
+    <div class="row no-gutters">
+        <aside class="col-md-6">
 <article class="gallery-wrap"> 
-	<div class="img-big-wrap">
-	   <a href="#"><img src="{{ produto.imagem.url }}"></a>
-	</div> <!-- img-big-wrap.// -->
-	
+    <div class="img-big-wrap">
+       <a href="#"><img src="{{ produto.imagem.url }}" alt="{{ produto.produto_nome }}" style="width:100%; height:auto;"></a>
+    </div> <!-- img-big-wrap.// -->
+    
 </article> <!-- gallery-wrap .end// -->
-		</aside>
-		<main class="col-md-6 border-left">
+        </aside>
+        <main class="col-md-6 border-left">
 <article class="content-body">
 
-<h2 class="title">{{produto.produto_nome}}</h2>
+<h2 class="title">{{ produto.produto_nome }}</h2>
 
 <div class="mb-3"> 
-	<var class="price h4">R${{produto.preco}}</var> 
+    <var class="price h4">R$ {{ produto.preco }}</var> 
 </div> 
 
-<p>{{produto.descricao}}</p>
-
+<p>{{ produto.descricao }}</p>
 
 <hr>
-	<div class="row">
-		<div class="item-option-select">
-			<h6>Choose Color</h6>
-			<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-			  <label class="btn btn-light">
-			    <input type="radio" name="radio_color"> Silver
-			  </label>
-			  <label class="btn btn-light">
-			    <input type="radio" name="radio_color" > Gray
-			  </label>
-			  <label class="btn btn-light active">
-			    <input type="radio" name="radio_color checked"> Gold
-			  </label>
-			  <label class="btn btn-light">
-			    <input type="radio" name="radio_color"> Black
-			  </label>
-			</div> 
-		</div>
-	</div> <!-- row.// -->
-	<div class="row">
-		<div class="item-option-select">
-			<h6>Select Size</h6>
-			<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-			  <label class="btn btn-light">
-			    <input type="radio" name="radio_color"> S
-			  </label>
-			  <label class="btn btn-light active">
-			    <input type="radio" name="radio_color" checked> M
-			  </label>
-			  <label class="btn btn-light">
-			    <input type="radio" name="radio_color"> L
-			  </label>
-			  <label class="btn btn-light">
-			    <input type="radio" name="radio_color"> XL
-			  </label>
-			</div> 
-		</div>
-	</div> <!-- row.// -->
-	<hr>
-	<a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+<div class="row">
+    <div class="col-md-6">
+        <div class="item-option-select">
+            <h6>Quantidade</h6>
+            <div class="input-group" style="width: 150px;">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button" id="btn-minus">-</button>
+                </div>
+                <input type="number" class="form-control text-center" id="qty" value="1" min="1" max="{{ produto.estoque }}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="btn-plus">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="item-option-select">
+            <h6>Disponibilidade</h6>
+            {% if produto.estoque > 0 %}
+                <span class="badge badge-success">Em estoque ({{ produto.estoque }} unidades)</span>
+            {% else %}
+                <span class="badge badge-danger">Fora de estoque</span>
+            {% endif %}
+        </div>
+    </div>
+</div> <!-- row.// -->
+
+<hr>
+<!-- filepath: c:\Users\rondyson\mercearia\templates\loja\produto_detalhe.html -->
+{% if produto.estoque > 0 %}
+    <form method="post" action="{% url 'adicionarItemCarrinho' produto.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="quantidade" id="quantidade" value="1">
+        <button type="submit" class="btn btn-primary">
+            <span class="text">Adicionar ao Carrinho</span>
+            <i class="fas fa-shopping-cart"></i>
+        </button>
+    </form>
+{% else %}
+    <button class="btn btn-secondary" disabled>Produto Indisponível</button>
+{% endif %}
+
 </article> <!-- product-info-aside .// -->
-		</main> <!-- col.// -->
-	</div> <!-- row.// -->
+        </main> <!-- col.// -->
+    </div> <!-- row.// -->
 </div> <!-- card.// -->
 <!-- ============================ COMPONENT 1 END .// ================================= -->
 
 <br>
 
 <div class="row">
-			<div class="col-md-9">
+    <div class="col-md-9">
 
-	<header class="section-heading">
-		<h3>Customer Reviews </h3>  
-		
-	</header>
+    <header class="section-heading">
+        <h3>Avaliações dos Clientes</h3>  
+    </header>
 
-	<article class="box mb-3">
-		<div class="icontext w-100">
-			<img src="./images/avatars/avatar1.jpg" class="img-xs icon rounded-circle">
-			<div class="text">
-				<span class="date text-muted float-md-right">24.04.2020 </span>  
-				<h6 class="mb-1">Mike John </h6>
-				
-			</div>
-		</div> <!-- icontext.// -->
-		<div class="mt-3">
-			<p>
-				Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip
-			</p>	
-		</div>
-	</article>
+    <article class="box mb-3">
+        <div class="icontext w-100">
+            <img src="{% static 'images/avatars/avatar1.jpg' %}" class="img-xs icon rounded-circle">
+            <div class="text">
+                <span class="date text-muted float-md-right">24.04.2020</span>  
+                <h6 class="mb-1">Maria Silva</h6>
+            </div>
+        </div> <!-- icontext.// -->
+        <div class="mt-3">
+            <p>
+                Produto excelente! Muito saboroso e chegou fresquinho. Recomendo a todos!
+            </p>	
+        </div>
+    </article>
 
-	
+    <article class="box mb-3">
+        <div class="icontext w-100">
+            <img src="{% static 'images/avatars/avatar2.jpg' %}" class="img-xs icon rounded-circle">
+            <div class="text">
+                <span class="date text-muted float-md-right">20.04.2020</span>  
+                <h6 class="mb-1">João Santos</h6>
+            </div>
+        </div> <!-- icontext.// -->
+        <div class="mt-3">
+            <p>
+                Muito bom! Comprei para o aniversário da minha filha e foi um sucesso. Qualidade excelente!
+            </p>	
+        </div>
+    </article>
 
-	</div> <!-- col.// -->
+    </div> <!-- col.// -->
 </div> <!-- row.// -->
-
 
 </div> <!-- container .//  -->
 </section>
 
-{% endblock%}
+<script>
+// JavaScript para controlar a quantidade
+document.getElementById('btn-plus').addEventListener('click', function() {
+    let qty = document.getElementById('qty');
+    let quantidade = document.getElementById('quantidade');
+    let currentValue = parseInt(qty.value);
+    let maxValue = parseInt(qty.getAttribute('max'));
+    
+    if (currentValue < maxValue) {
+        qty.value = currentValue + 1;
+        quantidade.value = currentValue + 1;
+    }
+});
 
+document.getElementById('btn-minus').addEventListener('click', function() {
+    let qty = document.getElementById('qty');
+    let quantidade = document.getElementById('quantidade');
+    let currentValue = parseInt(qty.value);
+    let minValue = parseInt(qty.getAttribute('min'));
+    
+    if (currentValue > minValue) {
+        qty.value = currentValue - 1;
+        quantidade.value = currentValue - 1;
+    }
+});
+
+// Sincronizar quando digitar diretamente no input
+document.getElementById('qty').addEventListener('input', function() {
+    let quantidade = document.getElementById('quantidade');
+    quantidade.value = this.value;
+});
+</script>
+
+{% endblock %}

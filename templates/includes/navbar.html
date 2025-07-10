@@ -58,15 +58,15 @@
                 <!-- Login e Carrinho -->
                 <div class="d-flex align-items-center ml-auto">
                     <div class="widget-header mr-3 text-right">
-                        <small class="title text-muted">Welcome guest!</small>
+                        <small class="title text-muted">Bem vindo</small>
                         <div>
                             <a href="./signin.html">Login</a> <span class="dark-transp"> | </span>
                             <a href="./register.html"> Cadatre-se</a>
                         </div>
                     </div>
-                    <a href="./cart.html" class="widget-header pl-3 ml-3">
-                        <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-                        <span class="badge badge-pill badge-danger notify">0</span>
+                    <a href="{% url 'carrinho' %}" class="widget-header pl-3 ml-3">
+                    <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+                    <span class="badge badge-pill badge-danger notify">{{ quantidade|default:0 }}</span>
                     </a>
                 </div>
             </div>

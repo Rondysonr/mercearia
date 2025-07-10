@@ -66,18 +66,19 @@
 			<figure class="card card-product-grid">
 				<div class="img-wrap"> 
 					
-					<img src="{{prod.imagem.url}}">
-					
+					<div class="img-wrap"> 
+						<a href="{% url 'produto_detalhe' categoria_slug=prod.categoria.slug produto_slug=prod.slug %}"><img src="{{prod.imagem.url}}">
+						</a>
+					</div> <!-- img-wrap.// -->
 				</div> <!-- img-wrap.// -->
 				<figcaption class="info-wrap">
 					<div class="fix-height">
-						<a href="./product-detail.html" class="title">{{prod.produto_nome}}</a>
+						<a href="{% url 'produto_detalhe' categoria_slug=prod.categoria.slug produto_slug=prod.slug %}" class="title">{{prod.produto_nome}}</a>
 						<div class="price-wrap mt-2">
 							<span class="price">R${{prod.preco}}</span>
-							<del class="price-old">$1980</del>
 						</div> <!-- price-wrap.// -->
 					</div>
-					<a href="#" class="btn btn-block btn-success">adicionar ao Carrinho </a>
+					<a href="{% url 'adicionarItemCarrinho' prod.id %}" class="btn btn-block btn-success">Adicionar ao Carrinho</a>
 				</figcaption>
 			</figure>
 		</div> <!-- col.// -->

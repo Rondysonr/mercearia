@@ -1,3 +1,4 @@
+<!-- filepath: c:\Users\rondyson\mercearia\templates\loja\carrinho.html -->
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
@@ -5,93 +6,208 @@
 <section class="section-content padding-y bg">
 <div class="container">
 
-
-
 <div class="row">
-	<aside class="col-lg-9">
+    <aside class="col-lg-9">
 <div class="card">
 <table class="table table-borderless table-shopping-cart">
 <thead class="text-muted">
 <tr class="small text-uppercase">
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Quantity</th>
-  <th scope="col" width="120">Price</th>
+  <th scope="col">Produto</th>
+  <th scope="col" width="120">Quantidade</th>
+  <th scope="col" width="120">Valor</th>
+  <th scope="col" width="120">Subtotal</th>
   <th scope="col" class="text-right" width="200"> </th>
 </tr>
 </thead>
 <tbody>
-<tr>
-	<td>
-		<figure class="itemside align-items-center">
-			<div class="aside"><img src="{% static './images/items/11.jpg'%}" class="img-sm"></div>
-			<figcaption class="info">
-				<a href="#" class="title text-dark">Camera Canon EOS M50 Kit</a>
-				<p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
-			</figcaption>
-		</figure>
-	</td>
-	<td> 
-		<!-- col.// -->
-					<div class="col"> 
-						<div class="input-group input-spinner">
-							<div class="input-group-prepend">
-							<button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </button>
-							</div>
-							<input type="text" class="form-control"  value="1">
-							<div class="input-group-append">
-							<button class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </button>
-							</div>
-						</div> <!-- input-group.// -->
-					</div> <!-- col.// -->
-	</td>
-	<td> 
-		<div class="price-wrap"> 
-			<var class="price">$1156.00</var> 
-			<small class="text-muted"> $315.20 each </small> 
-		</div> <!-- price-wrap .// -->
-	</td>
-	<td class="text-right"> 
-	<a href="" class="btn btn-danger"> Remove</a>
-	</td>
+    {% for item in car_items %}
+<tr data-produto-id="{{ item.produto.id }}" data-preco="{{ item.produto.preco }}">
+    <td>
+        <figure class="itemside align-items-center">
+            <div class="aside"><img src="{{item.produto.imagem.url}}" class="img-sm"></div>
+            <figcaption class="info">
+                <a href="#" class="title text-dark">{{item.produto.produto_nome}}</a>
+                <p class="text-muted small">{{item.produto.descricao}}</p>
+            </figcaption>
+        </figure>
+    </td>
+    <td> 
+        <div class="col"> 
+            <div class="input-group input-spinner">
+                <div class="input-group-prepend">
+                <button class="btn btn-light btn-minus" type="button" data-produto-id="{{ item.produto.id }}"> 
+                    <i class="fa fa-minus"></i> 
+                </button>
+                </div>
+                <input type="text" class="form-control text-center qty-input" value="{{item.quantidade}}" data-produto-id="{{ item.produto.id }}" readonly>
+                <div class="input-group-append">
+                <button class="btn btn-light btn-plus" type="button" data-produto-id="{{ item.produto.id }}"> 
+                    <i class="fa fa-plus"></i> 
+                </button>
+                </div>
+            </div> <!-- input-group.// -->
+        </div> <!-- col.// -->
+    </td>
+    <td> 
+        <div class="price-wrap"> 
+            <var class="price">R$ {{item.produto.preco|floatformat:2}}</var> 
+        </div> <!-- price-wrap .// -->
+    </td>
+    <td> 
+        <div class="price-wrap"> 
+            <var class="price subtotal-item" data-produto-id="{{ item.produto.id }}">R$ {{item.subtotal|floatformat:2}}</var> 
+        </div> <!-- price-wrap .// -->
+    </td>
+    <td class="text-right"> 
+    <a href="{% url 'remover_carrinho' item.produto.id %}" class="btn btn-danger">Remover</a>
+    </td>
 </tr>
-
+{% endfor%}
 </tbody>
 </table>
 </div> <!-- card.// -->
 
-	</aside> <!-- col.// -->
-	<aside class="col-lg-3">
+    </aside> <!-- col.// -->
+    <aside class="col-lg-3">
 
-		<div class="card">
-		<div class="card-body">
-			<dl class="dlist-align">
-			  <dt>Total price:</dt>
-			  <dd class="text-right">$69.97</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Tax:</dt>
-			  <dd class="text-right"> $10.00</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Total:</dt>
-			  <dd class="text-right text-dark b"><strong>$59.97</strong></dd>
-			</dl>
-			<hr>
-			<p class="text-center mb-3">
-				<img src="{% static './images/misc/payments.png' %}" height="26">
-			</p>
-			<a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
-		</div> <!-- card-body.// -->
-		</div> <!-- card.// -->
+        <div class="card">
+        <div class="card-body">
+            <dl class="dlist-align">
+              <dt>Subtotal:</dt>
+              <dd class="text-right" id="subtotal-total">R$ {{total|floatformat:2}}</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Taxa (5%):</dt>
+              <dd class="text-right" id="taxa-total">R$ {{taxa|floatformat:2}}</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Total:</dt>
+              <dd class="text-right text-dark b" id="total-geral"><strong>R$ {{total_geral|floatformat:2}}</strong></dd>
+            </dl>
+            <hr>
+            <p class="text-center mb-3">
+                <img src="{% static 'images/misc/payments.png' %}" height="26">
+            </p>
+            <a href="#" class="btn btn-primary btn-block"> Finalizar Compra </a>
+            <a href="{% url 'loja' %}" class="btn btn-light btn-block">Continuar Comprando</a>
+        </div> <!-- card-body.// -->
+        </div> <!-- card.// -->
 
 </aside> <!-- col.// -->
-
 
 </div> <!-- row.// -->
 <!-- ============================ COMPONENT 1 END .// ================================= -->
 
 </div> <!-- container .//  -->
 </section>
-{% endblock %}
 
+<script>
+// JavaScript para controlar quantidade no carrinho e atualizar subtotal
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Função para calcular subtotal de um item
+    function calcularSubtotal(produtoId, quantidade) {
+        const row = document.querySelector(`tr[data-produto-id="${produtoId}"]`);
+        const preco = parseFloat(row.getAttribute('data-preco'));
+        return preco * quantidade;
+    }
+    
+    // Função para atualizar subtotal na tela
+    function atualizarSubtotal(produtoId, novoSubtotal) {
+        const subtotalElement = document.querySelector(`.subtotal-item[data-produto-id="${produtoId}"]`);
+        subtotalElement.textContent = `R$ ${novoSubtotal.toFixed(2)}`;
+    }
+    
+    // Função para recalcular totais
+    function recalcularTotais() {
+        let total = 0;
+        
+        // Somar todos os subtotais
+        document.querySelectorAll('.subtotal-item').forEach(function(element) {
+            const valor = parseFloat(element.textContent.replace('R$ ', '').replace(',', '.'));
+            total += valor;
+        });
+        
+        // Calcular taxa de 5%
+        const taxa = total * 0.05;
+        const totalGeral = total + taxa;
+        
+        // Atualizar na tela
+        document.getElementById('subtotal-total').textContent = `R$ ${total.toFixed(2)}`;
+        document.getElementById('taxa-total').textContent = `R$ ${taxa.toFixed(2)}`;
+        document.getElementById('total-geral').innerHTML = `<strong>R$ ${totalGeral.toFixed(2)}</strong>`;
+    }
+    
+    // Botão PLUS
+    document.querySelectorAll('.btn-plus').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const produtoId = this.getAttribute('data-produto-id');
+            const input = document.querySelector(`.qty-input[data-produto-id="${produtoId}"]`);
+            const currentValue = parseInt(input.value);
+            const newValue = currentValue + 1;
+            
+            // Atualizar quantidade
+            input.value = newValue;
+            
+            // Calcular e atualizar subtotal
+            const novoSubtotal = calcularSubtotal(produtoId, newValue);
+            atualizarSubtotal(produtoId, novoSubtotal);
+            
+            // Recalcular totais
+            recalcularTotais();
+            
+            // Aqui você pode adicionar AJAX para atualizar no backend
+            // atualizarCarrinhoBackend(produtoId, newValue);
+        });
+    });
+    
+    // Botão MINUS
+    document.querySelectorAll('.btn-minus').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const produtoId = this.getAttribute('data-produto-id');
+            const input = document.querySelector(`.qty-input[data-produto-id="${produtoId}"]`);
+            const currentValue = parseInt(input.value);
+            
+            if (currentValue > 1) {
+                const newValue = currentValue - 1;
+                
+                // Atualizar quantidade
+                input.value = newValue;
+                
+                // Calcular e atualizar subtotal
+                const novoSubtotal = calcularSubtotal(produtoId, newValue);
+                atualizarSubtotal(produtoId, novoSubtotal);
+                
+                // Recalcular totais
+                recalcularTotais();
+                
+                // Aqui você pode adicionar AJAX para atualizar no backend
+                // atualizarCarrinhoBackend(produtoId, newValue);
+            }
+        });
+    });
+});
+
+// Função para atualizar carrinho no backend via AJAX (opcional)
+function atualizarCarrinhoBackend(produtoId, quantidade) {
+    fetch(`/carrinho/atualizar/${produtoId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        body: JSON.stringify({'quantidade': quantidade})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Carrinho atualizado com sucesso!');
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao atualizar carrinho:', error);
+    });
+}
+</script>
+
+{% endblock %}
