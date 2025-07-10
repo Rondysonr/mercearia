@@ -1,0 +1,53 @@
+<!-- filepath: c:\Users\rondyson\mercearia\templates\loja\perfil.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <h4>Meu Perfil</h4>
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="col form-group">
+                  <label>Nome</label>
+                  <input type="text" name="first_name" class="form-control" value="{{ user.first_name }}">
+                </div>
+                <div class="col form-group">
+                  <label>Sobrenome</label>
+                  <input type="text" name="last_name" class="form-control" value="{{ user.last_name }}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="{{ user.email }}">
+              </div>
+              <div class="form-group">
+                <label>Telefone</label>
+                <input type="tel" name="phone_number" class="form-control" value="{{ perfil.phone_number }}">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Cidade</label>
+                  <input type="text" name="city" class="form-control" value="{{ perfil.city }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Estado</label>
+                  <input type="text" name="state" class="form-control" value="{{ perfil.state }}">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

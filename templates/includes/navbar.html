@@ -1,3 +1,4 @@
+<!-- filepath: c:\Users\rondyson\mercearia\templates\includes\navbar.html -->
 {% load static %}
 
 <header class="section-header">
@@ -58,17 +59,41 @@
                 <!-- Login e Carrinho -->
                 <div class="d-flex align-items-center ml-auto">
                     <div class="widget-header mr-3 text-right">
-                        <small class="title text-muted">Bem vindo</small>
-                        <div>
-                            <a href="./signin.html">Login</a> <span class="dark-transp"> | </span>
-                            <a href="./register.html"> Cadatre-se</a>
-                        </div>
+                        {% if user.is_authenticated %}
+                            <!-- Usuário logado -->
+                            <small class="title text-muted">Olá {{ user.first_name|default:user.username }}</small>
+                            <div class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user"></i> Minha Conta
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{% url 'perfil' %}">
+                                        <i class="fa fa-user"></i> Meu Perfil
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa fa-list"></i> Meus Pedidos
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">
+                                        <i class="fa fa-sign-out"></i> Sair
+                                    </a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <!-- Usuário não logado -->
+                            <small class="title text-muted">Bem-vindo</small>
+                            <div>
+                                <a href="{% url 'login' %}">Login</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'registro' %}">Cadastre-se</a>
+                            </div>
+                        {% endif %}
                     </div>
                     <a href="{% url 'carrinho' %}" class="widget-header pl-3 ml-3">
-                    <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-                    <span class="badge badge-pill badge-danger notify">{{ quantidade|default:0 }}</span>
+                        <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+                        <span class="badge badge-pill badge-danger notify">{{ quantidade|default:0 }}</span>
                     </a>
                 </div>
             </div>
         </div>
-        
+    </section>
+</header>

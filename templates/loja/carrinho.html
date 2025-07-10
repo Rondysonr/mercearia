@@ -21,13 +21,40 @@
 </thead>
 <tbody>
     {% for item in car_items %}
-<tr data-produto-id="{{ item.produto.id }}" data-preco="{{ item.produto.preco }}">
+<tr data-produto-id="{% if item.produto %}{{ item.produto.id }}{% else %}bolo_{{ item.id }}{% endif %}" 
+    data-preco="{% if item.produto %}{{ item.produto.preco }}{% else %}{{ item.preco_unitario }}{% endif %}">
     <td>
         <figure class="itemside align-items-center">
-            <div class="aside"><img src="{{item.produto.imagem.url}}" class="img-sm"></div>
+            <div class="aside">
+                {% if item.produto %}
+                    <img src="{{item.produto.imagem.url}}" class="img-sm">
+                {% else %}
+                    <img src="{% static 'images/bolo-default.png' %}" class="img-sm" style="width: 80px; height: 80px; object-fit: cover;">
+                {% endif %}
+            </div>
             <figcaption class="info">
-                <a href="#" class="title text-dark">{{item.produto.produto_nome}}</a>
-                <p class="text-muted small">{{item.produto.descricao}}</p>
+                {% if item.produto %}
+                    <a href="#" class="title text-dark">{{item.produto.produto_nome}}</a>
+                    <p class="text-muted small">{{item.produto.descricao}}</p>
+                {% else %}
+                    <span class="title text-dark">Bolo Personalizado</span>
+                    {% if item.dados_personalizacao %}
+                        <div class="text-muted small">
+                            {% load custom_filters %}
+                            {% with dados=item.dados_personalizacao|parse_json %}
+                                <small>
+                                    <strong>{{ dados.peso }}kg</strong><br>
+                                    Formato: {{ dados.formato }}<br>
+                                    Massa: {{ dados.massa }}<br>
+                                    Recheio: {{ dados.recheio }}<br>
+                                    Cobertura: {{ dados.cobertura }}<br>
+                                    {% if dados.enfeite %}Enfeite: {{ dados.enfeite }}<br>{% endif %}
+                                    {% if dados.observacoes %}Obs: {{ dados.observacoes }}{% endif %}
+                                </small>
+                            {% endwith %}
+                        </div>
+                    {% endif %}
+                {% endif %}
             </figcaption>
         </figure>
     </td>
@@ -35,13 +62,16 @@
         <div class="col"> 
             <div class="input-group input-spinner">
                 <div class="input-group-prepend">
-                <button class="btn btn-light btn-minus" type="button" data-produto-id="{{ item.produto.id }}"> 
+                <button class="btn btn-light btn-minus" type="button" 
+                        data-produto-id="{% if item.produto %}{{ item.produto.id }}{% else %}bolo_{{ item.id }}{% endif %}"> 
                     <i class="fa fa-minus"></i> 
                 </button>
                 </div>
-                <input type="text" class="form-control text-center qty-input" value="{{item.quantidade}}" data-produto-id="{{ item.produto.id }}" readonly>
+                <input type="text" class="form-control text-center qty-input" value="{{item.quantidade}}" 
+                       data-produto-id="{% if item.produto %}{{ item.produto.id }}{% else %}bolo_{{ item.id }}{% endif %}" readonly>
                 <div class="input-group-append">
-                <button class="btn btn-light btn-plus" type="button" data-produto-id="{{ item.produto.id }}"> 
+                <button class="btn btn-light btn-plus" type="button" 
+                        data-produto-id="{% if item.produto %}{{ item.produto.id }}{% else %}bolo_{{ item.id }}{% endif %}"> 
                     <i class="fa fa-plus"></i> 
                 </button>
                 </div>
@@ -50,16 +80,39 @@
     </td>
     <td> 
         <div class="price-wrap"> 
-            <var class="price">R$ {{item.produto.preco|floatformat:2}}</var> 
+            {% if item.produto %}
+                <var class="price">R$ {{item.produto.preco|floatformat:2}}</var>
+            {% else %}
+                <var class="price">R$ {{item.preco_unitario|floatformat:2}}</var>
+            {% endif %}
         </div> <!-- price-wrap .// -->
     </td>
     <td> 
         <div class="price-wrap"> 
-            <var class="price subtotal-item" data-produto-id="{{ item.produto.id }}">R$ {{item.subtotal|floatformat:2}}</var> 
+            <var class="price subtotal-item" 
+                 data-produto-id="{% if item.produto %}{{ item.produto.id }}{% else %}bolo_{{ item.id }}{% endif %}">
+                R$ {{item.subtotal|floatformat:2}}
+            </var> 
         </div> <!-- price-wrap .// -->
     </td>
     <td class="text-right"> 
-    <a href="{% url 'remover_carrinho' item.produto.id %}" class="btn btn-danger">Remover</a>
+        {% if item.produto %}
+            <a href="{% url 'remover_carrinho' item.produto.id %}" class="btn btn-danger btn-sm">Remover</a>
+        {% else %}
+            <a href="#" onclick="removerBoloPersonalizado({{ item.id }})" class="btn btn-danger btn-sm">Remover</a>
+        {% endif %}
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="5" class="text-center">
+        <div class="py-5">
+            <h5 class="text-muted">Seu carrinho está vazio!</h5>
+            <p class="text-muted">Adicione alguns produtos deliciosos ao seu carrinho.</p>
+            <a href="{% url 'loja' %}" class="btn btn-primary">
+                <i class="fa fa-shopping-bag"></i> Continuar Comprando
+            </a>
+        </div>
     </td>
 </tr>
 {% endfor%}
@@ -88,8 +141,13 @@
             <p class="text-center mb-3">
                 <img src="{% static 'images/misc/payments.png' %}" height="26">
             </p>
-            <a href="#" class="btn btn-primary btn-block"> Finalizar Compra </a>
-            <a href="{% url 'loja' %}" class="btn btn-light btn-block">Continuar Comprando</a>
+            {% if car_items %}
+                <a href="#" class="btn btn-primary btn-block"> Finalizar Compra </a>
+                <a href="{% url 'loja' %}" class="btn btn-light btn-block">Continuar Comprando</a>
+            {% else %}
+                <a href="{% url 'loja' %}" class="btn btn-primary btn-block">Começar a Comprar</a>
+                <a href="{% url 'bolo_personalizado' %}" class="btn btn-success btn-block">Criar Bolo Personalizado</a>
+            {% endif %}
         </div> <!-- card-body.// -->
         </div> <!-- card.// -->
 
@@ -156,8 +214,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Recalcular totais
             recalcularTotais();
             
-            // Aqui você pode adicionar AJAX para atualizar no backend
-            // atualizarCarrinhoBackend(produtoId, newValue);
+            // Atualizar no backend para produtos normais
+            if (!produtoId.startsWith('bolo_')) {
+                atualizarCarrinhoBackend(produtoId, newValue);
+            }
         });
     });
     
@@ -181,8 +241,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Recalcular totais
                 recalcularTotais();
                 
-                // Aqui você pode adicionar AJAX para atualizar no backend
-                // atualizarCarrinhoBackend(produtoId, newValue);
+                // Atualizar no backend para produtos normais
+                if (!produtoId.startsWith('bolo_')) {
+                    atualizarCarrinhoBackend(produtoId, newValue);
+                }
             }
         });
     });
@@ -207,6 +269,31 @@ function atualizarCarrinhoBackend(produtoId, quantidade) {
     .catch(error => {
         console.error('Erro ao atualizar carrinho:', error);
     });
+}
+
+// Função para remover bolo personalizado
+function removerBoloPersonalizado(itemId) {
+    if (confirm('Tem certeza que deseja remover este bolo personalizado?')) {
+        fetch(`/carrinho/remover-bolo/${itemId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Erro ao remover item: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao remover item');
+        });
+    }
 }
 </script>
 

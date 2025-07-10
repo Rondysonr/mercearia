@@ -1,10 +1,8 @@
+<!-- filepath: c:\Users\rondyson\mercearia\templates\loja\loja.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- ========================= SECTION PAGETOP ========================= -->
 
-
-<!-- filepath: c:\Users\rondyson\mercearia\templates\loja\loja.html -->
 <section class="section-pagetop bg" style="padding:0;">
   <div class="container-fluid p-0">
     <a href="{% url 'bolo_personalizado' %}">
@@ -13,78 +11,70 @@
     </a>
   </div>
 </section>
-<!-- ========================= SECTION INTRO END// ========================= -->
 
-<!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-y">
 <div class="container">
 
 <div class="row">
-	<aside class="col-md-3">
-		
+    <aside class="col-md-3">
+        
 <div class="card">
-	<article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Categorias</h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse_1" style="">
-			<div class="card-body">
-				
-				<ul class="list-menu">
-				<li><a href="{% url 'loja'%}">Todas as categorias</a></li>
-					{%for cat in opcoes%}
-						<li><a href="{{ cat.get_url }}"> {{ cat.categoria_nome }}</a></li>
-					{% endfor %}
-				</ul>
+    <article class="filter-group">
+        <header class="card-header">
+            <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                <i class="icon-control fa fa-chevron-down"></i>
+                <h6 class="title">Categorias</h6>
+            </a>
+        </header>
+        <div class="filter-content collapse show" id="collapse_1" style="">
+            <div class="card-body">
+                
+                <ul class="list-menu">
+                <li><a href="{% url 'loja'%}">Todas as categorias</a></li>
+                    {%for cat in opcoes%}
+                        <li><a href="{{ cat.get_url }}"> {{ cat.categoria_nome }}</a></li>
+                    {% endfor %}
+                </ul>
 
-			</div> <!-- card-body.// -->
-		</div>
-	</article> <!-- filter-group  .// -->
-	 
-		<div class="filter-content collapse show" id="collapse_3" style="">
-		</div>
-	</article> <!-- filter-group .// -->
-	
-</div> <!-- card.// -->
+            </div>
+        </div>
+    </article>
+    
+</div>
 
-	</aside> <!-- col.// -->
-	<main class="col-md-9">
+    </aside>
+    <main class="col-md-9">
 
 <header class="border-bottom mb-4 pb-3">
-		<div class="form-inline">
-			<span class="mr-md-auto">{{prod.produto_quant}} Itens encontrados </span>
-			
-		</div>
-</header><!-- sect-heading -->
+        <div class="form-inline">
+            <span class="mr-md-auto">{{produtos_quant}} Itens encontrados </span>
+            
+        </div>
+</header>
 
 <div class="row">
-	{%for prod in produtos %}
-		<div class="col-md-4">
-			<figure class="card card-product-grid">
-				<div class="img-wrap"> 
-					
-					<div class="img-wrap"> 
-						<a href="{% url 'produto_detalhe' categoria_slug=prod.categoria.slug produto_slug=prod.slug %}"><img src="{{prod.imagem.url}}">
-						</a>
-					</div> <!-- img-wrap.// -->
-				</div> <!-- img-wrap.// -->
-				<figcaption class="info-wrap">
-					<div class="fix-height">
-						<a href="{% url 'produto_detalhe' categoria_slug=prod.categoria.slug produto_slug=prod.slug %}" class="title">{{prod.produto_nome}}</a>
-						<div class="price-wrap mt-2">
-							<span class="price">R${{prod.preco}}</span>
-						</div> <!-- price-wrap.// -->
-					</div>
-					<a href="{% url 'adicionarItemCarrinho' prod.id %}" class="btn btn-block btn-success">Adicionar ao Carrinho</a>
-				</figcaption>
-			</figure>
-		</div> <!-- col.// -->
-	{% endfor %}
-</div> <!-- row end.// -->
-
+    {%for prod in produtos %}
+        <div class="col-md-4">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> 
+                    <div class="img-wrap"> 
+                        <a href="{{ prod.get_url }}"><img src="{{prod.imagem.url}}">
+                        </a>
+                    </div>
+                </div>
+                <figcaption class="info-wrap">
+                    <div class="fix-height">
+                        <a href="{{ prod.get_url }}" class="title">{{prod.produto_nome}}</a>
+                        <div class="price-wrap mt-2">
+                            <span class="price">R${{prod.preco}}</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'adicionarItemCarrinho' prod.id %}" class="btn btn-block btn-success">Adicionar ao Carrinho</a>
+                </figcaption>
+            </figure>
+        </div>
+    {% endfor %}
+</div>
 
 <nav class="mt-4" aria-label="Page navigation sample">
   <ul class="pagination">
@@ -96,11 +86,10 @@
   </ul>
 </nav>
 
-	</main> <!-- col.// -->
+    </main>
 
 </div>
 
-</div> <!-- container .//  -->
+</div>
 </section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
 {% endblock %}

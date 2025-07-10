@@ -1,0 +1,122 @@
+<!-- filepath: c:\Users\rondyson\mercearia\templates\users\registro.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+
+<!-- ============================ COMPONENT REGISTER   ================================= -->
+<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+  <article class="card-body">
+    <header class="mb-4"><h4 class="card-title">Cadastro</h4></header>
+    
+    <!-- Mostrar mensagens de erro -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="col form-group">
+          <label>Nome</label>
+          <input type="text" name="first_name" class="form-control" placeholder="Digite seu nome" required>
+        </div>
+        <div class="col form-group">
+          <label>Sobrenome</label>
+          <input type="text" name="last_name" class="form-control" placeholder="Digite seu sobrenome" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" placeholder="Digite seu email" required>
+        <small class="form-text text-muted">Nunca compartilharemos seu email com ninguém.</small>
+      </div>
+      <div class="form-group">
+        <label>Telefone</label>
+        <input type="tel" name="phone_number" class="form-control" placeholder="(11) 99999-9999">
+      </div>
+      <div class="form-group">
+        <label>Gênero</label>
+        <div>
+          <label class="custom-control custom-radio custom-control-inline">
+            <input class="custom-control-input" type="radio" name="gender" value="M" checked>
+            <span class="custom-control-label">Masculino</span>
+          </label>
+          <label class="custom-control custom-radio custom-control-inline">
+            <input class="custom-control-input" type="radio" name="gender" value="F">
+            <span class="custom-control-label">Feminino</span>
+          </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Cidade</label>
+          <input type="text" name="city" class="form-control" placeholder="Digite sua cidade">
+        </div>
+        <div class="form-group col-md-6">
+          <label>Estado</label>
+          <select name="state" class="form-control">
+            <option value="">Escolha...</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Criar senha</label>
+          <input class="form-control" type="password" name="password" placeholder="Mínimo 8 caracteres" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Confirmar senha</label>
+          <input class="form-control" type="password" name="confirm_password" placeholder="Repita a senha" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+      </div>    
+    </form>
+  </article>
+</div>
+<p class="text-center mt-4">Já tem uma conta? <a href="{% url 'login' %}">Fazer Login</a></p>
+<br><br>
+<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

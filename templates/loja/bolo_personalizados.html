@@ -1,3 +1,4 @@
+<!-- filepath: c:\Users\rondyson\mercearia\templates\loja\bolo_personalizados.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
@@ -62,6 +63,11 @@
     background-color: #d63b28;
   }
 
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
   #resultado {
     margin-top: 25px;
     text-align: center;
@@ -106,12 +112,44 @@
   .clear {
     clear: both;
   }
+
+  .preco-highlight {
+    font-size: 20px;
+    color: #d63b28;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .loading {
+    opacity: 0.6;
+  }
+
+  .success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: 1px solid #c3e6cb;
+  }
+
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: 1px solid #f5c6cb;
+  }
 </style>
 
 <div class="page-bolo-personalizado">
   <h1>Monte seu Bolo Personalizado</h1>
 
-  <form id="formBolo">
+  <form id="formBolo" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
     <!-- IMAGEM -->
     <label for="imagem">Imagem de Referência (opcional):</label>
     <input type="file" name="imagem" id="imagem" accept="image/*">
@@ -119,11 +157,14 @@
 
     <!-- FORMATO -->
     <label for="formato">Formato do Bolo:</label>
-    <select name="formato" id="formato" onchange="mostrarInfo(this)">
-      <option value="">Nenhum</option>
+    <select name="formato" id="formato" onchange="mostrarInfo(this); calcularPreco();" required>
+      <option value="">Selecione um formato</option>
       {% for formato in formatos %}
-        <option value="{{ formato.slug }}" data-descricao="{{ formato.descricao }}" data-imagem="{{ formato.imagem.url }}">
-          {{ formato.produto_nome }}
+        <option value="{{ formato.slug }}" 
+                data-descricao="{{ formato.descricao }}" 
+                data-imagem="{{ formato.imagem.url }}"
+                data-preco="{{ formato.preco }}">
+          {{ formato.produto_nome }} - R$ {{ formato.preco }}
         </option>
       {% endfor %}
     </select>
@@ -136,11 +177,14 @@
 
     <!-- MASSA -->
     <label for="massa">Sabor da Massa:</label>
-    <select name="massa" id="massa" onchange="mostrarInfo(this)">
-      <option value="">Nenhum</option>
+    <select name="massa" id="massa" onchange="mostrarInfo(this); calcularPreco();" required>
+      <option value="">Selecione uma massa</option>
       {% for massa in massas %}
-        <option value="{{ massa.slug }}" data-descricao="{{ massa.descricao }}" data-imagem="{{ massa.imagem.url }}">
-          {{ massa.produto_nome }}
+        <option value="{{ massa.slug }}" 
+                data-descricao="{{ massa.descricao }}" 
+                data-imagem="{{ massa.imagem.url }}"
+                data-preco="{{ massa.preco }}">
+          {{ massa.produto_nome }} - R$ {{ massa.preco }}
         </option>
       {% endfor %}
     </select>
@@ -153,11 +197,14 @@
 
     <!-- RECHEIO -->
     <label for="recheio">Recheio:</label>
-    <select name="recheio" id="recheio" onchange="mostrarInfo(this)">
-      <option value="">Nenhum</option>
+    <select name="recheio" id="recheio" onchange="mostrarInfo(this); calcularPreco();" required>
+      <option value="">Selecione um recheio</option>
       {% for recheio in recheios %}
-        <option value="{{ recheio.slug }}" data-descricao="{{ recheio.descricao }}" data-imagem="{{ recheio.imagem.url }}">
-          {{ recheio.produto_nome }}
+        <option value="{{ recheio.slug }}" 
+                data-descricao="{{ recheio.descricao }}" 
+                data-imagem="{{ recheio.imagem.url }}"
+                data-preco="{{ recheio.preco }}">
+          {{ recheio.produto_nome }} - R$ {{ recheio.preco }}
         </option>
       {% endfor %}
     </select>
@@ -170,11 +217,14 @@
 
     <!-- COBERTURA -->
     <label for="cobertura">Cobertura:</label>
-    <select name="cobertura" id="cobertura" onchange="mostrarInfo(this)">
-      <option value="">Nenhum</option>
+    <select name="cobertura" id="cobertura" onchange="mostrarInfo(this); calcularPreco();" required>
+      <option value="">Selecione uma cobertura</option>
       {% for cobertura in coberturas %}
-        <option value="{{ cobertura.slug }}" data-descricao="{{ cobertura.descricao }}" data-imagem="{{ cobertura.imagem.url }}">
-          {{ cobertura.produto_nome }}
+        <option value="{{ cobertura.slug }}" 
+                data-descricao="{{ cobertura.descricao }}" 
+                data-imagem="{{ cobertura.imagem.url }}"
+                data-preco="{{ cobertura.preco }}">
+          {{ cobertura.produto_nome }} - R$ {{ cobertura.preco }}
         </option>
       {% endfor %}
     </select>
@@ -186,12 +236,15 @@
     </div>
 
     <!-- ENFEITE -->
-    <label for="enfeite">Enfeites:</label>
-    <select name="enfeite" id="enfeite" onchange="mostrarInfo(this)">
+    <label for="enfeite">Enfeites (opcional):</label>
+    <select name="enfeite" id="enfeite" onchange="mostrarInfo(this); calcularPreco();">
       <option value="">Nenhum</option>
       {% for enfeite in enfeites %}
-        <option value="{{ enfeite.slug }}" data-descricao="{{ enfeite.descricao }}" data-imagem="{{ enfeite.imagem.url }}">
-          {{ enfeite.produto_nome }}
+        <option value="{{ enfeite.slug }}" 
+                data-descricao="{{ enfeite.descricao }}" 
+                data-imagem="{{ enfeite.imagem.url }}"
+                data-preco="{{ enfeite.preco }}">
+          {{ enfeite.produto_nome }} - R$ {{ enfeite.preco }}
         </option>
       {% endfor %}
     </select>
@@ -204,19 +257,31 @@
 
     <!-- PESO -->
     <label for="peso">Peso (kg):</label>
-    <input type="number" name="peso" id="peso" step="0.1" min="0.5" required>
+    <input type="number" name="peso" id="peso" step="0.1" min="0.5" max="10" onchange="calcularPreco();" required>
+    <small class="form-text text-muted">Mínimo: 0.5kg | Máximo: 10kg</small>
 
     <!-- PREÇO -->
     <label for="preco">Preço Estimado:</label>
-    <input type="text" id="preco" name="preco" placeholder="A calcular..." readonly>
+    <input type="text" id="preco-display" name="preco_display" placeholder="Selecione as opções..." readonly>
+    <input type="hidden" id="preco-valor" name="preco_valor">
+    <div class="preco-highlight" id="preco-highlight" style="display: none;"></div>
 
-    <button type="submit">Visualizar Montagem</button>
+    <!-- OBSERVAÇÕES -->
+    <label for="observacoes">Observações Especiais (opcional):</label>
+    <textarea name="observacoes" id="observacoes" rows="3" class="form-control" placeholder="Escreva aqui detalhes especiais, cores, mensagens, etc."></textarea>
+
+    <button type="submit" id="btn-adicionar" disabled>Adicionar ao Carrinho</button>
   </form>
 
   <div id="resultado"></div>
 </div>
 
 <script>
+  // Variáveis globais
+  let precoTotal = 0;
+  let precoBase = 30; // Preço base por kg
+
+  // Preview da imagem
   document.getElementById('imagem').addEventListener('change', function () {
     const file = this.files[0];
     const preview = document.getElementById('preview');
@@ -231,6 +296,7 @@
     }
   });
 
+  // Mostrar informações dos ingredientes
   function mostrarInfo(selectElement) {
     const id = selectElement.id;
     const selected = selectElement.options[selectElement.selectedIndex];
@@ -239,7 +305,7 @@
     const imagem = selected.getAttribute('data-imagem');
 
     const box = document.getElementById(`info-${id}`);
-    if (descricao && imagem) {
+    if (descricao && imagem && selected.value) {
       document.getElementById(`${id}-nome`).textContent = nome;
       document.getElementById(`${id}-desc`).textContent = descricao;
       document.getElementById(`${id}-img`).src = imagem;
@@ -249,19 +315,126 @@
     }
   }
 
-  document.getElementById('formBolo').addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.getElementById('resultado').innerText = 'Visualização pronta!';
-  });
+  // Calcular preço estimado
+  function calcularPreco() {
+    const formato = document.getElementById('formato');
+    const massa = document.getElementById('massa');
+    const recheio = document.getElementById('recheio');
+    const cobertura = document.getElementById('cobertura');
+    const enfeite = document.getElementById('enfeite');
+    const peso = parseFloat(document.getElementById('peso').value) || 0;
 
-  window.addEventListener('DOMContentLoaded', function () {
-    const selects = ['formato', 'massa', 'recheio', 'cobertura', 'enfeite'];
-    selects.forEach(function (id) {
-      const select = document.getElementById(id);
-      if (select) {
-        mostrarInfo(select);
+    // Verificar se os campos obrigatórios estão preenchidos
+    if (!formato.value || !massa.value || !recheio.value || !cobertura.value || peso < 0.5) {
+      document.getElementById('preco-display').value = 'Complete os campos obrigatórios...';
+      document.getElementById('preco-highlight').style.display = 'none';
+      document.getElementById('btn-adicionar').disabled = true;
+      return;
+    }
+
+    // Calcular preço
+    let total = precoBase * peso; // Preço base por kg
+
+    // Adicionar preços dos ingredientes
+    const selects = [formato, massa, recheio, cobertura, enfeite];
+    selects.forEach(select => {
+      if (select.value) {
+        const selectedOption = select.options[select.selectedIndex];
+        const preco = parseFloat(selectedOption.getAttribute('data-preco')) || 0;
+        total += preco;
       }
     });
+
+    // Aplicar multiplicador por peso (para ingredientes especiais)
+    total = total * (1 + (peso - 0.5) * 0.1); // 10% a mais para cada 0.5kg extra
+
+    precoTotal = total;
+    
+    // Exibir preço
+    document.getElementById('preco-display').value = `R$ ${total.toFixed(2)}`;
+    document.getElementById('preco-valor').value = total.toFixed(2);
+    document.getElementById('preco-highlight').textContent = `Total: R$ ${total.toFixed(2)}`;
+    document.getElementById('preco-highlight').style.display = 'block';
+    
+    // Habilitar botão
+    document.getElementById('btn-adicionar').disabled = false;
+  }
+
+  // Adicionar ao carrinho
+  document.getElementById('formBolo').addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    const form = this;
+    const formData = new FormData(form);
+    const btnAdicionar = document.getElementById('btn-adicionar');
+    const resultado = document.getElementById('resultado');
+    
+    // Adicionar preço ao FormData
+    formData.append('preco_total', precoTotal.toFixed(2));
+    
+    // Validar formulário
+    if (!form.formato.value || !form.massa.value || !form.recheio.value || !form.cobertura.value || !form.peso.value) {
+      resultado.innerHTML = '<div class="error-message">Por favor, preencha todos os campos obrigatórios.</div>';
+      return;
+    }
+    
+    // Desabilitar botão e mostrar loading
+    btnAdicionar.disabled = true;
+    btnAdicionar.textContent = 'Adicionando...';
+    form.classList.add('loading');
+    
+    // Enviar para o servidor
+    fetch("{% url 'adicionar_bolo_personalizado' %}", {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        resultado.innerHTML = '<div class="success-message">Bolo personalizado adicionado ao carrinho com sucesso!</div>';
+        
+        // Opção para continuar comprando ou ir para o carrinho
+        setTimeout(() => {
+          resultado.innerHTML += `
+            <div style="text-align: center; margin-top: 15px;">
+              <a href="{% url 'loja' %}" class="btn btn-secondary" style="margin-right: 10px;">Continuar Comprando</a>
+              <a href="{% url 'carrinho' %}" class="btn btn-primary">Ver Carrinho</a>
+            </div>
+          `;
+        }, 1000);
+        
+        // Reset form
+        form.reset();
+        document.getElementById('preco-display').value = 'Selecione as opções...';
+        document.getElementById('preco-highlight').style.display = 'none';
+        document.getElementById('preview').innerHTML = '';
+        
+        // Esconder info boxes
+        document.querySelectorAll('.info-box').forEach(box => {
+          box.style.display = 'none';
+        });
+        
+      } else {
+        resultado.innerHTML = `<div class="error-message">Erro: ${data.message}</div>`;
+      }
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+      resultado.innerHTML = '<div class="error-message">Erro ao adicionar ao carrinho. Tente novamente.</div>';
+    })
+    .finally(() => {
+      btnAdicionar.disabled = false;
+      btnAdicionar.textContent = 'Adicionar ao Carrinho';
+      form.classList.remove('loading');
+    });
+  });
+
+  // Inicializar
+  window.addEventListener('DOMContentLoaded', function () {
+    calcularPreco();
   });
 </script>
 
