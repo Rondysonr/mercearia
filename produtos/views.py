@@ -123,19 +123,26 @@ def adicionar_bolo_personalizado(request):
             # Adicionar ao carrinho
             carrinho_id = _obter_carrinho_id(request)
             
+            # Obter ou criar o carrinho
+            try:
+                from carrinhos.models import Carrinho
+                carrinho = Carrinho.objects.get(car_id=carrinho_id)
+            except Carrinho.DoesNotExist:
+                carrinho = Carrinho.objects.create(car_id=carrinho_id)
+            
             # Criar novo item no carrinho para bolo personalizado
             CarItem.objects.create(
-                carrinho=None,  # Bolo personalizado não tem carrinho fixo
+                carrinho=carrinho,  # Associar ao carrinho
                 produto=None,  # Bolo personalizado não tem produto fixo
                 user=request.user if request.user.is_authenticated else None,
                 quantidade=1,
                 preco_unitario=preco_total,
                 dados_personalizacao=json.dumps({
-                    'formato': formato_slug,
-                    'massa': massa_slug,
-                    'recheio': recheio_slug,
-                    'cobertura': cobertura_slug,
-                    'enfeite': enfeite_slug,
+                    'formato': formato.produto_nome,
+                    'massa': massa.produto_nome,
+                    'recheio': recheio.produto_nome,
+                    'cobertura': cobertura.produto_nome,
+                    'enfeite': enfeite.produto_nome if enfeite else '',
                     'peso': peso,
                     'observacoes': observacoes,
                     'descricao': descricao,

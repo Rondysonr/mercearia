@@ -21,7 +21,15 @@ def visualizarCarrinho(request, total=0, quantidade=0, car_items=None):
         total = Decimal('0.00')
         
         for car_item in car_items:
-            total += (car_item.produto.preco * car_item.quantidade)
+            # Calcular preço baseado no tipo de item
+            if car_item.produto:
+                # Item normal
+                item_total = car_item.produto.preco * car_item.quantidade
+            else:
+                # Item personalizado (bolo)
+                item_total = car_item.preco_unitario * car_item.quantidade
+            
+            total += item_total
             quantidade += car_item.quantidade
             
     except ObjectDoesNotExist:
